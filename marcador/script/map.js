@@ -1,5 +1,6 @@
 // esta variable hara de namespace
-var geolocalizacion = geolocalizacion || {};
+var Geolocalizacion = Geolocalizacion || {};
+Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 
 //Lo asignado a self sera es publico, es decir se puede acceder utilizando geolocalizacion.
 //lo definido solo como var sera privado
@@ -81,7 +82,7 @@ var geolocalizacion = geolocalizacion || {};
              // Nueva infowindow, el tooltip que aparece al hacer click
             var infoWindow = new google.maps.InfoWindow();
             
-            geolocalizacion.displayMarkers(puntos, infoWindow);
+            Geolocalizacion.MultMarcadores.displayMarkers(puntos, infoWindow);
             console.log(puntos);
 
         }
@@ -120,4 +121,7 @@ var geolocalizacion = geolocalizacion || {};
         });
     }
     
-})(geolocalizacion);
+})(Geolocalizacion.Marcador);
+// De este closure solo sera visible Geolocalizacion.Marcador.verMarcador y Geolocalizacion.Marcador.guardar
+// Al estar modularizado y utilizar namespace especifico de los modulos en vez de un namespace comun se evita al màximo la colision de nombres 
+// de variables. Todos los scripts que incluya en el html podrìan tener ua funcion llamada verMarcador que pertenezca a su modulo

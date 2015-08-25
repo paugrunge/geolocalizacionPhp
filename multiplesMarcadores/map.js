@@ -4,7 +4,8 @@
 
 //Asignación inicial a un objeto literal vacío o a si mismo
 //si ya fue creado previamente.
-var geolocalizacion = geolocalizacion || {};
+var Geolocalizacion = Geolocalizacion || {};
+Geolocalizacion.MultMarcadores = Geolocalizacion.MultMarcadores || {};
 
 //Lo asignado a self sera es publico, es decir se puede acceder utilizando geolocalizacion.
 //lo definido solo como var sera privado
@@ -122,4 +123,5 @@ var geolocalizacion = geolocalizacion || {};
        });
     }
     
-})(geolocalizacion);
+})(Geolocalizacion.MultMarcadores);
+//De este closure solo sera visible Geolocalizacion.MultMarcadores.displayMarkers
