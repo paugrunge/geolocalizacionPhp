@@ -123,5 +123,22 @@ Geolocalizacion.MultMarcadores = Geolocalizacion.MultMarcadores || {};
        });
     }
     
+     self.cargar = function cargar(){
+
+
+        var promise = $.ajax
+                        ({
+                        type: "POST",
+                        url: "nexoAjax.php",
+                        data: ({"accion" : "cargar"}),
+                        cache: false,
+                        dataType: "text"
+                      });// fin del ajax
+
+        promise.done(function (dato){
+            alert(dato);
+        });
+    }
+    
 })(Geolocalizacion.MultMarcadores);
 //De este closure solo sera visible Geolocalizacion.MultMarcadores.displayMarkers

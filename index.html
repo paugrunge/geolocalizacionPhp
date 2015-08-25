@@ -2,36 +2,52 @@
 <html>
 	<head>
         <meta charset="UTF-8">
-		<title>AJAX</title>
+		<title>Geolocalización</title>
          <!-- bootstrap CSS -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		 <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
          <!-- bootstrap -->
          <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- GreenSock libreria para animaciones-->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
+        
+        <script type="text/javascript">
+           
+            window.onload = function() {
+                TweenMax.staggerTo([ $("button")], 1, {opacity:0.9, rotation:360}, 0.25);
+                //TweenMax.fromTo($("#tit"), 1.5, {right:0}, {right:15});
+                TweenMax.to($("#tit"), 1, {left:"50%"});
+                TweenMax.fromTo($("#img1"), 1.5, {width:0, height:0}, {width: 190, height:150});
+                TweenMax.fromTo($("#img2"), 1.5, {width:0, height:0}, {width: 190, height:150});
+           }
+        </script>
+        
     </head>
     <body>
-        <h1>Geolocalización</h1>
+        <h1 >
+            <div id="tit" style="position: relative">Geolocalización</div>
+        </h1>
         <div class="jumbotron">
             <div class="container">
-                <div style="float:right"><img class="img-thumbnail" name = "imagen" id = "img" src="imagenes/geolocalizacion.png" alt="Imagen aqui" width="190" height="150" style="float:right"></div>
-                <button type="button" id="btnGuardar" class="btn btn-primary" onclick="location.href='marcador/index.html'" >
+                <div style="float:right"><img class="img-thumbnail" name = "imagen" id = "img1" src="imagenes/geolocalizacion.png" alt="Imagen aqui" width="190" height="150" style="float:right"></div>
+                <button type="button" id="btnMenu1" class="btn btn-primary" onclick="location.href='marcador/index.html'" >
                 Estoy acá! <br>Ingresa tus marcadores y guardalos en archivo de texto
                 </button>
                 <br>
                 <br>
                 <br>
-                <button type="button" id="btnGuardar" class="btn btn-primary" onclick="location.href='multiplesMarcadores/marcadores.html'">
+                <button type="button" id="btnMenu2" class="btn btn-primary" onclick="location.href='multiplesMarcadores/marcadores.html'">
                 Mis lugares <br>carga de múltiples marcadores por medio de txt y excel.
                 </button>
                 <br>
                 <br>
                 <br>
-                <button type="button" id="btnGuardar" class="btn btn-primary" onclick="location.href=''">
+                <button type="button" id="btnMenu3" class="btn btn-primary" onclick="location.href=''">
                 Algo a definir <br>algo mas
                 </button>
   
-                <div style="float:right"><img class="img-thumbnail" name = "imagen" id = "img" src="imagenes/geolocation-1333363169_full550.png" alt="Imagen aqui" width="190" height="150" style="float:right"></div>
+                <div style="float:right"><img class="img-thumbnail" name = "imagen" id = "img2" src="imagenes/geolocation-1333363169_full550.png" alt="Imagen aqui" width="190" height="150" style="float:right"></div>
             </div>
         </div>
     </body>
