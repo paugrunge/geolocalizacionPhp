@@ -20,15 +20,17 @@
     <!-- Google maps -->
      <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 	
-
+    <script type="text/javascript" src="../multiplesMarcadores/map.js">
+     </script>
      <script type="text/javascript" src="script/map.js">
      </script>
+     
 </head>
 
 
-<body  onload="mostrarGoogleMaps()" >
+<body>
     
-    <div id="ingreso">
+    <div id="ingreso" style="padding-left:10px">
         <h1>Ingrese coordenadas de su ubicación</h1>
         <label for="lat">Latitud</label>
         <input type="number" id="lat" style="max-width:20%;"/>
@@ -36,8 +38,8 @@
         <input type="number" id="lng" style="max-width:20%;"/>
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" style="max-width:20%;"/>
-        <button type="button" id="btnVer" class="btn btn-primary" onclick="verMarcador()" >Ver en mapa</button>
-        <button type="button" id="btnGuardar" class="btn btn-primary" onclick="guardar()" >Guardar mis marcadores</button>
+        <button type="button" id="btnVer" class="btn btn-primary" onclick="geolocalizacion.verMarcador()" >Ver en mapa</button>
+        <button type="button" id="btnGuardar" class="btn btn-primary" onclick="geolocalizacion.guardar()" >Guardar mis marcadores</button>
         
         <div id="divError" class='alert alert-danger' role='alert' style="display:none"></div>
     </div>
