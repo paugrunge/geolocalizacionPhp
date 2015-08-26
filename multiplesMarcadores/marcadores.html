@@ -17,15 +17,16 @@
    <!-- bootstrap -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+     <script type="text/javascript" src="../scripts/common.js"></script>
     <script type="text/javascript" src="map.js"></script>
   </head>
   <body>
       
     <div id="carga" style="padding-left:10px" class="jumbotron">
         <h2>Ingrese arcvhivo de marcadores en formato de texto (.txt) o  Excel (.xls)</h2>
-        <input type="file" id="archivo" name = "archivo"/>
-        <button type="button" id="btnVer" class="btn btn-primary" onclick="" >Ver en mapa</button>
-        
+            <input type="file" id="archivo" name = "archivo"/>
+            <button type="button" id="btnVer" class="btn btn-primary" onclick="Geolocalizacion.MultMarcadores.cargar()" >Ver en mapa</button>
+
         <div id="divError" class='alert alert-danger' role='alert' style="display:none"></div>
     </div>
       

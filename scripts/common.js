@@ -16,14 +16,13 @@ var Geolocalizacion = Geolocalizacion || {};
     // a la posicion de los marcadores
        var bounds = new google.maps.LatLngBounds();
 
-       // For loop that runs through the info on markersData making it possible to createMarker function to create the markers
        for (var i = 0; i < marcadores.length; i++){
 
           var latlng = new google.maps.LatLng(marcadores[i].lat, marcadores[i].lng);
           var nombre = marcadores[i].nombre;
           var dire = marcadores[i].direccion;
           var codPostal = marcadores[i].codPostal;
-
+            
           //La creacion del marcador
           createMarker(map, latlng, nombre, dire, codPostal, infoWindow);
 

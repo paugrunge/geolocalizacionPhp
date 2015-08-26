@@ -8,6 +8,8 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 //Envolvemos el módulo dentro de una función auto-ejecutable
 (function (self){
     
+    var map; 
+    
     var mostrarGoogleMaps = function mostrarGoogleMaps() {
         //Creamos el punto a partir de las coordenadas:
         var punto = new google.maps.LatLng(-34.603657,-58.381794);
@@ -82,7 +84,7 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
              // Nueva infowindow, el tooltip que aparece al hacer click
             var infoWindow = new google.maps.InfoWindow();
             
-            Geolocalizacion.MultMarcadores.displayMarkers(puntos, infoWindow);
+            Geolocalizacion.displayMarkers(map, puntos, infoWindow);
             console.log(puntos);
 
         }
