@@ -39,15 +39,19 @@ if(isset($_FILES['fichero']))
 
 	                    while(!feof($file))
 	                    {
-	                        $linea = explode(">", fgets($file));
-	                        $objeto = new stdClass();
-	                        $objeto->lat = $linea[0];
-	                        $objeto->lng = $linea[1];
-	                        $objeto->nombre = $linea[2];
-	                        $objeto->direccion = "";
-	                        $objeto->codPostal = "";
-	                        
-	                        array_push($jsondata["puntos"], $objeto);
+	                    	$linea = trim(fgets($file));
+        					if(!empty($linea))
+        					{
+		                        $linea = explode(">", $linea);
+		                        $objeto = new stdClass();
+		                        $objeto->lat = $linea[0];
+		                        $objeto->lng = $linea[1];
+		                        $objeto->nombre = $linea[2];
+		                        $objeto->direccion = "";
+		                        $objeto->codPostal = "";
+		                        
+		                        array_push($jsondata["puntos"], $objeto);
+        					}
 	                    }
 	                        fclose($file);
     				}

@@ -1,19 +1,23 @@
  <?php 
+session_start();
 
 if(isset($_POST["marcadores"]))
 {
-$puntos = $_POST["marcadores"];
+    $filename = "marcadores" . getdate()[0] . ".txt";
+    
+    $_SESSION['file'] = $filename;
+    $puntos = $_POST["marcadores"];
+    
+    $file = fopen($filename, "w");
+    
+    foreach ($puntos as $valor)
+    {
+        $lat =  $valor["lat"];
+        $lng =  $valor["lng"];
+        $nombre =  $valor["nombre"];
+        fwrite($file, $lat.">".$lng.">".$nombre . PHP_EOL);
 
-$file = fopen("marcadores.txt", "w");
-
-foreach ($puntos as $valor)
-{
-    $lat =  $valor["lat"];
-    $lng =  $valor["lng"];
-    $nombre =  $valor["nombre"];
-    //$lat = $valor
-    fwrite($file, $lat.">".$lng.">".$nombre . PHP_EOL);
-}
+    }
 
 fclose($file);
     
