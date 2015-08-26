@@ -30,16 +30,13 @@ if(isset($_FILES['fichero']))
     			}
     			else
     			{
-    				
+    				$jsondata["puntos"] = array();
     				if($EXT == "txt")
     				{
 	        			//Leo el archivo para obtener un array de los marcadores
 	        			
 	        			$file = fopen($_FILES['fichero']['tmp_name'], "r");
-	                    
-	                    
-	                    $jsondata["puntos"] = array();
-	                    
+
 	                    while(!feof($file))
 	                    {
 	                        $linea = explode(">", fgets($file));
@@ -57,7 +54,27 @@ if(isset($_FILES['fichero']))
     				else 
     				{
    						//Es un .xls o .xlsx
-   						$jsondata["message"] = "Implementar lectura de Excel";
+   						//$jsondata["message"] = "Implementar lectura de Excel";
+   						
+   						require_once '../Excel/reader.php';
+
+						$data = new Spreadsheet_Excel_Reader();
+						$data->setOutputEncoding('CP1251');
+						$data->read($_FILES['fichero']['tmp_name']);
+
+						//Se comienza de indice 2 para un excel donde la primera row sea los titulos de las columnas
+						for ($i = 2; $i <= $data->sheets[0]['numRows']; $i++) 
+						{
+						    $objeto = new stdClass();
+	                        $objeto->lat = $data->sheets[0]['cells'][$i][1];
+	                        $objeto->lng = $data->sheets[0]['cells'][$i][2];
+	                        $objeto->nombre = $data->sheets[0]['cells'][$i][3];
+	                        $objeto->direccion = $data->sheets[0]['cells'][$i][4];
+	                        $objeto->codPostal = $data->sheets[0]['cells'][$i][5];
+							
+						 	array_push($jsondata["puntos"], $objeto);
+						 }
+
    						
     				}
     				//envio como espuesta el array conteniendo array de marcadores

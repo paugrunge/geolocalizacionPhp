@@ -92,6 +92,7 @@ Geolocalizacion.MultMarcadores = Geolocalizacion.MultMarcadores || {};
                       });// fin del ajax
 
         promise.done(function (dato){
+            alert(dato["puntos"]);
             if (dato["message"] == "ok")
                 Geolocalizacion.displayMarkers(map, dato["puntos"], infoWindow);
             else
