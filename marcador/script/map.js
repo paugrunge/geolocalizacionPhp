@@ -11,6 +11,8 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
     var map; 
     
     var mostrarGoogleMaps = function mostrarGoogleMaps() {
+         
+         $("#btnDescarga").attr("disabled", true);
         //Creamos el punto a partir de las coordenadas:
         var punto = new google.maps.LatLng(-34.603657,-58.381794);
 
@@ -120,6 +122,12 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 
         promise.done(function (dato){
             alert(dato);
+             var strIndex = dato.indexOf('No ingreso');
+             if(strIndex == -1) 
+             {
+              //string no encontrado
+               $("#btnDescarga").attr("disabled", false);
+             }
         });
     }
     
