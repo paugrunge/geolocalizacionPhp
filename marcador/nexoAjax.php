@@ -3,7 +3,7 @@ session_start();
 
 if(isset($_POST["marcadores"]))
 {
-    $filename = "marcadores" . getdate()[0] . ".txt";
+    $filename = "Archivos/marcadores" . getdate()[0] . ".txt";
     
     $_SESSION['file'] = $filename;
     $puntos = $_POST["marcadores"];

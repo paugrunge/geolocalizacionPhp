@@ -110,7 +110,6 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 
     self.guardar = function guardar(){
 
-
         var promise = $.ajax
                         ({
                         type: "POST",
@@ -121,13 +120,15 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
                       });// fin del ajax
 
         promise.done(function (dato){
-            alert(dato);
              var strIndex = dato.indexOf('No ingreso');
              if(strIndex == -1) 
              {
               //string no encontrado
-               $("#btnDescarga").attr("disabled", false);
+               //$("#btnDescarga").attr("disabled", false);
+                location.href='descarga.php';
              }
+             else 
+                alert(dato);
         });
     }
     
