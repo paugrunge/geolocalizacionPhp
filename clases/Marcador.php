@@ -67,7 +67,7 @@ class Marcador
         return $leidos;
     }
     
-    public static function descarcarTxt($fichero)
+    public static function descargarTxt($fichero)
     {
         $basefichero = basename($fichero);
           

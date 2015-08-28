@@ -7,7 +7,7 @@ require_once '../clases/Marcador.php';
     $file =  $_SESSION['file'];
     if (file_exists ($file))
     {
-         Marcador::descarcarTxt($file);
+         Marcador::descargarTxt($file);
     }
     else
       echo "No hay archivo para descargar, debe guardar primero.";
