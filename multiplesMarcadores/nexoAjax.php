@@ -22,6 +22,7 @@ if(isset($_FILES['fichero']))
 			}
 			else
 			{
+                
     			$tamanio=$_FILES['fichero']['size'];
     			if($tamanio>10024000)
     			{
@@ -30,56 +31,21 @@ if(isset($_FILES['fichero']))
     			}
     			else
     			{
-    				$jsondata["puntos"] = array();
+                    require_once '../clases/Marcador.php';
+                    
     				if($EXT == "txt")
     				{
-	        			//Leo el archivo para obtener un array de los marcadores
-	        			
-	        			$file = fopen($_FILES['fichero']['tmp_name'], "r");
-
-	                    while(!feof($file))
-	                    {
-	                    	$linea = trim(fgets($file));
-        					if(!empty($linea))
-        					{
-		                        $linea = explode(">", $linea);
-		                        $objeto = new stdClass();
-		                        $objeto->lat = $linea[0];
-		                        $objeto->lng = $linea[1];
-		                        $objeto->nombre = $linea[2];
-		                        $objeto->direccion = "";
-		                        $objeto->codPostal = "";
-		                        
-		                        array_push($jsondata["puntos"], $objeto);
-        					}
-	                    }
-	                        fclose($file);
+                        $jsondata["puntos"] = Marcador::leerMarcadoresTxt($_FILES['fichero']['tmp_name']);
+                        
     				}
     				else 
     				{
    						//Es un .xls o .xlsx
    						//$jsondata["message"] = "Implementar lectura de Excel";
-   						
-   						require_once '../Excel/reader.php';
-
-						$data = new Spreadsheet_Excel_Reader();
-						$data->setOutputEncoding('CP1251');
-						$data->read($_FILES['fichero']['tmp_name']);
-
-						//Se comienza de indice 2 para un excel donde la primera row sea los titulos de las columnas
-						for ($i = 2; $i <= $data->sheets[0]['numRows']; $i++) 
-						{
-						    $objeto = new stdClass();
-	                        $objeto->lat = $data->sheets[0]['cells'][$i][1];
-	                        $objeto->lng = $data->sheets[0]['cells'][$i][2];
-	                        $objeto->nombre = $data->sheets[0]['cells'][$i][3];
-	                        $objeto->direccion = $data->sheets[0]['cells'][$i][4];
-	                        $objeto->codPostal = $data->sheets[0]['cells'][$i][5];
-							
-						 	array_push($jsondata["puntos"], $objeto);
-						 }
-
-   						
+                        require_once '../Excel/reader.php';
+                        
+                        $jsondata["puntos"] = Marcador::leerMarcadoresExcel($_FILES['fichero']['tmp_name']);
+						 						
     				}
     				//envio como espuesta el array conteniendo array de marcadores
 					echo json_encode($jsondata);
