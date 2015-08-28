@@ -11,12 +11,9 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
     var map; 
      // Nueva infowindow, el tooltip que aparece al hacer click
     var infoWindow = new google.maps.InfoWindow();
-     var miLat = 0;
-     var miLng = 0;
-     var puntos = [];
+    var puntos = [];
      
-     
-     var iniciar = function iniciar() {
+    var iniciar = function iniciar() {
         //Geolocalizacion del navegador
          if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -45,7 +42,7 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
               var p = {
                 "lat" : lat,
                 "lng": lng,
-                "nombre": "Estoy en este lugar!",
+                "nombre": "Estoy en este lugar! (Eso dice mi navegador)",
                 "direccion" : "",
                 "codPostal" : ""
                 }
