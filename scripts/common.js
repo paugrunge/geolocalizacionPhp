@@ -41,13 +41,14 @@ var Geolocalizacion = Geolocalizacion || {};
         var marker = new google.maps.Marker({
           map: map,
           position: latlng,
-          title: nombre
+          title: nombre,
           //,animation: google.maps.Animation.DROP
        });
 
        // Evento click en marcador
        // Cuando se dispara el evento se crea infowindow
        // y se abre
+       
        google.maps.event.addListener(marker, 'click', function() {
 
           // Variable para definir el html del tooltip infowindow
@@ -61,6 +62,11 @@ var Geolocalizacion = Geolocalizacion || {};
 
           // Abriendo
           infowin.open(map, marker);
+       });
+       
+        // Evento que cierra infowindow con un click en el mapa
+       google.maps.event.addListener(map, 'click', function() {
+          infowin.close();
        });
     }
     

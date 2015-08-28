@@ -58,11 +58,6 @@ Geolocalizacion.MultMarcadores = Geolocalizacion.MultMarcadores || {};
        // Nueva infowindow, el tooltip que aparece al hacer click
        infoWindow = new google.maps.InfoWindow();
 
-       // Evento que cierra infowindow con un click en el mapa
-       google.maps.event.addListener(map, 'click', function() {
-          infoWindow.close();
-       });
-
        // Se llama para comenzar con la creacion de los marcadores
        //Geolocalizacion.displayMarkers(map, marcadores, infoWindow);
     }

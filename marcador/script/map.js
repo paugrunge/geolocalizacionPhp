@@ -9,11 +9,10 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 (function (self){
     
     var map; 
-     // Nueva infowindow, el tooltip que aparece al hacer click
-    var infoWindow = new google.maps.InfoWindow();
+    var infoWindow;
     var puntos = [];
      
-    var iniciar = function iniciar() {
+    self.iniciar = function iniciar() {
         //Geolocalizacion del navegador
          if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -33,6 +32,9 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
      }
     
     var mostrarGoogleMaps = function mostrarGoogleMaps(lat, lng) {
+         
+        // Nueva infowindow, el tooltip que aparece al hacer click
+         infoWindow = new google.maps.InfoWindow();
          
         //Creamos el punto del centro del mapa a partir de las coordenadas:
         if (lat == 0 && lng == 0)
@@ -67,7 +69,7 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 
       };
     
-     google.maps.event.addDomListener(window, 'load', iniciar);
+     //google.maps.event.addDomListener(window, 'load', iniciar);
     
 
     self.verMarcador = function verMarcador(){
