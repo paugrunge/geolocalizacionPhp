@@ -42,6 +42,7 @@ var Geolocalizacion = Geolocalizacion || {};
           map: map,
           position: latlng,
           title: nombre
+          //,animation: google.maps.Animation.DROP
        });
 
        // Evento click en marcador
@@ -58,7 +59,7 @@ var Geolocalizacion = Geolocalizacion || {};
           // Seteandole el contenido
           infowin.setContent(iwContent);
 
-          // Abrriendo
+          // Abriendo
           infowin.open(map, marker);
        });
     }

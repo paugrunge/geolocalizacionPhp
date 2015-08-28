@@ -9,16 +9,54 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 (function (self){
     
     var map; 
+     // Nueva infowindow, el tooltip que aparece al hacer click
+    var infoWindow = new google.maps.InfoWindow();
+     var miLat = 0;
+     var miLng = 0;
+     var puntos = [];
+     
+     
+     var iniciar = function iniciar() {
+        //Geolocalizacion del navegador
+         if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                    //alert('Tu lat-long es: ' + position.coords.latitude + ' / ' + position.coords.longitude);
+                    mostrarGoogleMaps(position.coords.latitude, position.coords.longitude);
+            },
+            function(objPositionError){
+                //Usuario bloqueo la ubicacion o ha tardado demasiado en responder
+                mostrarGoogleMaps(0, 0);
+                }
+            );
+        }
+        // navegador no soporta geolocalizacion
+        else {
+            mostrarGoogleMaps(0, 0);
+        }
+     }
     
-    var mostrarGoogleMaps = function mostrarGoogleMaps() {
+    var mostrarGoogleMaps = function mostrarGoogleMaps(lat, lng) {
          
-         $("#btnDescarga").attr("disabled", true);
-        //Creamos el punto a partir de las coordenadas:
-        var punto = new google.maps.LatLng(-34.603657,-58.381794);
+        //Creamos el punto del centro del mapa a partir de las coordenadas:
+        if (lat == 0 && lng == 0)
+            var punto = new google.maps.LatLng(-34.603657,-58.381794);
+        else {
+             var punto = new google.maps.LatLng(lat,lng);
+              var p = {
+                "lat" : lat,
+                "lng": lng,
+                "nombre": "Estoy en este lugar!",
+                "direccion" : "",
+                "codPostal" : ""
+                }
+             puntos.push(p);
+        }
 
         //Configuramos las opciones indicando Zoom, punto(el que hemos creado) y tipo de mapa
         var myOptions = {
-        zoom: 14, center: punto, mapTypeId: google.maps.MapTypeId.ROADMAP //G_MAP_TYPE o ROADMAP
+        zoom: 14, 
+        center: punto, 
+        mapTypeId: google.maps.MapTypeId.ROADMAP //G_MAP_TYPE o ROADMAP
         };
 
 
@@ -26,18 +64,18 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 
         bounds = new google.maps.LatLngBounds();
 
-        countMarker = 0;
-
-        puntos = [];
+        //countMarker = 0;
+        if (puntos.length > 0)
+            Geolocalizacion.displayMarkers(map, puntos, infoWindow);
 
       };
     
-     google.maps.event.addDomListener(window, 'load', mostrarGoogleMaps);
-
+     google.maps.event.addDomListener(window, 'load', iniciar);
+    
 
     self.verMarcador = function verMarcador(){
 
-        countMarker++;
+        //countMarker++;
         $("#divError").hide();
 
         var lat = $("#lat").val();
@@ -83,9 +121,6 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 
             puntos.push(p);
 
-             // Nueva infowindow, el tooltip que aparece al hacer click
-            var infoWindow = new google.maps.InfoWindow();
-            
             Geolocalizacion.displayMarkers(map, puntos, infoWindow);
             console.log(puntos);
 

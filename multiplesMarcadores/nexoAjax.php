@@ -42,7 +42,7 @@ if(isset($_FILES['fichero']))
     				{
    						//Es un .xls o .xlsx
    						//$jsondata["message"] = "Implementar lectura de Excel";
-                        require_once '../Excel/reader.php';
+                       require_once '../clases/reader.php';
                         
                         $jsondata["puntos"] = Marcador::leerMarcadoresExcel($_FILES['fichero']['tmp_name']);
 						 						
