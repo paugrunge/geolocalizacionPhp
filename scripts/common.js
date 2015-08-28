@@ -41,7 +41,7 @@ var Geolocalizacion = Geolocalizacion || {};
         var marker = new google.maps.Marker({
           map: map,
           position: latlng,
-          title: nombre,
+          title: nombre
           //,animation: google.maps.Animation.DROP
        });
 
