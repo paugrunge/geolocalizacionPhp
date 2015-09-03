@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+   <meta charset="UTF-8">
+
+     <title>Ruta entre 2 puntos</title>
+     
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+     <link rel="stylesheet" type="text/css" href="../estilos/estilos.css" />
+     
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <!-- bootstrap -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   
+    <!-- Google maps -->
+    <!--script type="text/javascript" src="https://maps.google.com/maps/api/js?callback=Geolocalizacion.Marcador.iniciar"></script-->
+
+    <script type="text/javascript" src="../scripts/common.js"></script>
+    <script type="text/javascript" src="rutas.js"></script>
+     
+</head>
+
+
+<body>
+    
+    <div id="ingreso" style="padding-left:10px" class="jumbotron">
+        <h2>Ingrese origen y destino</h2>
+       
+        <label for="origen">Origen</label>
+        <input type="text" name="origen" id="origen" placeholder="coordenadas o calle, ciudad, estado..." />
+        <br />
+        <label for="destino">Destino</label>
+        <input type="text" name="destino" id="destino" placeholder="coordenadas o calle, ciudad, estado..." />
+        <br />
+       
+        <!--div id="divError" class='alert alert-danger' role='alert' style="display:none"></div-->
+        
+         <select id="modoViaje" onchange="Geolocalizacion.Rutas.buscar()">
+            <option value="DRIVING" selected="selected">Auto</option>
+            <option value="BICYCLING">Bicicleta</option>
+            <option value="WALKING">Caminando</option>
+        </select>
+        
+         <input type="button" id="buscar"  class="btn btn-primary" value="Buscar ruta" onclick="Geolocalizacion.Rutas.buscar()"/>
+         
+        <button type="button" id="btnMenu" class="btn btn-primary" onclick="location.href='../index.html'">Volver</button>
+        
+    </div>
+
+    <div id="contenedor" style="height:900px">
+        <div id="mostrarMapa" style="float:left; width:70%; height:650px">
+             <script async defer src="https://maps.google.com/maps/api/js?callback=Geolocalizacion.Rutas.mostrarGoogleMaps"></script>
+        </div>
+        <div id="panelRuta" style="float:right; overflow: auto; width:30%; height: 650px"></div>
+    </div>
+
+
+    
+</body>
+
+</html>
