@@ -70,6 +70,29 @@ var Geolocalizacion = Geolocalizacion || {};
        });
     }
     
+    //Funcion para generar ruta entre 2 puntos
+    self.hacerRuta = function(map, directionsService, directionsDisplay, origen, destino, modoViaje, div){
+		if(!origen || !destino){
+			alert("Origen y destino son requeridos");
+			return;
+		}
+		var request = {
+		        origin: origen,
+		        destination: destino,
+		        travelMode: google.maps.DirectionsTravelMode[modoViaje],
+		        unitSystem: google.maps.DirectionsUnitSystem["METRIC"],
+		        provideRouteAlternatives: true
+	    };
+		directionsService.route(request, function(response, status) {
+	        if (status == google.maps.DirectionsStatus.OK) {
+	            directionsDisplay.setMap(map);
+	            directionsDisplay.setPanel(div);
+	            directionsDisplay.setDirections(response);
+	        } else {
+	            alert("No hay ruta disponible entre los 2 puntos");
+	        }
+	    });
+	}
     
 })(Geolocalizacion);
-//De este closure solo sera visible Geolocalizacion.displayMarkers
+//De este closure solo sera visible Geolocalizacion.displayMarkers y Geolocalizacion.hacerRuta
