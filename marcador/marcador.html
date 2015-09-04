@@ -28,11 +28,19 @@
 <body>
     
     <div id="ingreso" style="padding-left:10px" class="jumbotron">
-        <h2>Ingrese coordenadas de su ubicación</h2>
-        <label for="lat">Latitud</label>
-        <input type="number" id="lat" style="max-width:20%;" placeholder="-34.662340"/>
-        <label for="lng">Longitud</label>
-        <input type="number" id="lng" style="max-width:20%;" placeholder="-58.364716"/>
+        <h2>Ingrese su ubicación</h2>
+        <select id="modo" onchange="Geolocalizacion.Marcador.mostrarCtrls()">
+            <option value="coord">Coordenadas</option>
+            <option value="dire" selected="selected">Direccion</option>
+        </select>
+        <label for="lat" id="latLabel" style="display:none">Latitud</label>
+        <input type="number" id="lat" style="max-width:20%;display:none" placeholder="-34.662340"/>
+        <label for="lng" id="lngLabel" style="display:none">Longitud</label>
+        <input type="number" id="lng" style="max-width:20%;display:none" placeholder="-58.364716"/>
+        
+        <label for="lng" id="direLabel">Direccion</label>
+        <input type="text" id="dire" style="max-width:20%;min-width:15%" placeholder="calle, ciudad, provincia, pais"/>
+        
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" style="max-width:20%;" placeholder="UTN FRA"/>
         <button type="button" id="btnVer" class="btn btn-primary" onclick="Geolocalizacion.Marcador.verMarcador()" >Ver en mapa</button>

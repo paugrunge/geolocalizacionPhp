@@ -68,6 +68,8 @@ var Geolocalizacion = Geolocalizacion || {};
        google.maps.event.addListener(map, 'click', function() {
           infowin.close();
        });
+       
+       return marker;
     }
     
     //Funcion para generar ruta entre 2 puntos
@@ -93,6 +95,42 @@ var Geolocalizacion = Geolocalizacion || {};
 	        }
 	    });
 	}
+	
+	self.encontrarDireccion = function(map, direccion, nombre, geocoder, puntos, infowin){
+        
+         var marker = createMarker(map, 0, nombre, direccion, "", infowin);
+        
+        
+        //hago la llamada al geodecoder de google
+        geocoder.geocode( { 'address': direccion}, 
+        
+        function(results, status) {
+         
+            //si el estado de la llamado es OK
+            if (status == google.maps.GeocoderStatus.OK) {
+                //centro el mapa en las coordenadas obtenidas
+                map.setCenter(results[0].geometry.location);
+                //coloco el marcador en dichas coordenadas
+                marker.setPosition(results[0].geometry.location);
+               
+               var p = {
+                "lat" : results[0].geometry.location.lat(),
+                "lng": results[0].geometry.location.lng(),
+                "nombre": nombre,
+                "direccion" : direccion,
+                "codPostal" : ""
+                }
+
+                puntos.push(p);
+
+                
+            } else {
+              //si no es OK devuelvo error
+              alert("No se puede encontrar la direccion, error: " + status);
+            }
+        });
+	}
+	
     
 })(Geolocalizacion);
 //De este closure solo sera visible Geolocalizacion.displayMarkers y Geolocalizacion.hacerRuta

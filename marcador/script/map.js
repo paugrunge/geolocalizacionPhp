@@ -11,6 +11,7 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
     var map; 
     var infoWindow;
     var puntos = [];
+    var geocoder = null;
      
     self.iniciar = function iniciar() {
         //Geolocalizacion del navegador
@@ -35,6 +36,8 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
          
         // Nueva infowindow, el tooltip que aparece al hacer click
          infoWindow = new google.maps.InfoWindow();
+         
+         geocoder = new google.maps.Geocoder();
          
         //Creamos el punto del centro del mapa a partir de las coordenadas:
         if (lat == 0 && lng == 0)
@@ -80,35 +83,11 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
         var lat = $("#lat").val();
         var lng = $("#lng").val();
         var nombre = $("#nombre").val();
-
-        if(validar(lat,lng)){
-            
+        var dire = $("#dire").val();
         
-//             Ahora que tengo el modulo utilizo la funcion que ya defini en el otro script para crear puntos
-//            var punto = new google.maps.LatLng(lat,lng);
-//
-//            var marker=new google.maps.Marker({
-//              position:punto,
-//              map : map,
-//              title: nombre
-//              });
-//
-//            // la variable bounds utiza el marcador
-//             bounds.extend(punto); 
-//
-//            //Adecuo los limites del mapa de acuerdo a variable bounds
-//              map.fitBounds(bounds);
-//
-//            //Para volver a acomodar el zoom luego de adecuar los
-//            // limites del mapa al marcador
-//            if(countMarker == 1)
-//            {
-//                var listener = google.maps.event.addListener(map, "idle",function () {
-//                    map.setZoom(14);
-//                   google.maps.event.removeListener(listener);
-//                });
-//            }
-
+        if ($('#dire').is(':hidden')){
+            
+            if(validar(lat,lng)){
             //agrego al array de marcadores por si elijen guardar
             var p = {
                 "lat" : lat,
@@ -123,14 +102,44 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
             Geolocalizacion.displayMarkers(map, puntos, infoWindow);
             console.log(puntos);
 
+            }
+            else{
+                $("#divError").html("Debe ingresar latitud y longitud numericas validas");
+                $("#divError").show();
+    
+            }
         }
-        else{
-            $("#divError").html("Debe ingresar latitud y longitud numericas validas");
-             $("#divError").show();
-
+        else {
+            if(dire != "") {
+                
+            //     var marker = new google.maps.Marker({
+            //       map: map,
+            //       position: 0,
+            //       title: nombre
+            //   });
+        
+            //   google.maps.event.addListener(marker, 'click', function() {
+        
+            //       // Variable para definir el html del tooltip infowindow
+            //       var iwContent = '<div id="iw_container">' +
+            //       '<div class="iw_title">' + nombre + '</div></div>';
+        
+            //       // Seteandole el contenido
+            //       infoWindow.setContent(iwContent);
+        
+            //       // Abriendo
+            //       infoWindow.open(map, marker);
+            //   });
+               
+              Geolocalizacion.encontrarDireccion(map, dire, nombre, geocoder, puntos, infoWindow);
+  
+                  
+            }
+            else {
+                $("#divError").html("Debe ingresar direccion en formato: calle, ciudad, provincia, país");
+                $("#divError").show();
+            }
         }
-
-
     }
 
     var validar = function validar(lat,lng){
@@ -164,6 +173,33 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
              else 
                 alert(dato);
         });
+    }
+    
+    self.mostrarCtrls = function(){
+        var cbo = $("#modo").val();
+
+        if (cbo == "dire"){
+            
+            $("#dire").show();
+            $("#direLabel").show();
+            $("#lat").hide();
+            $("#latLabel").hide();
+            $("#lng").hide();
+            $("#lngLabel").hide();
+            
+             $("#lat").val("");
+             $("#lng").val("");
+        }
+        else {
+            $("#dire").hide();
+            $("#direLabel").hide();
+            $("#lat").show();
+            $("#latLabel").show();
+            $("#lng").show();
+            $("#lngLabel").show();
+            
+             $("#dire").val("");
+        }
     }
     
 })(Geolocalizacion.Marcador);

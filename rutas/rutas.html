@@ -31,20 +31,19 @@
         <h2>Ingrese origen y destino</h2>
        
         <label for="origen">Origen</label>
-        <input type="text" name="origen" id="origen" placeholder="coordenadas o calle, ciudad, estado..." />
-        <br />
+        <input type="text" name="origen" id="origen" placeholder="coordenadas o calle, ciudad, provincia..." />
         <label for="destino">Destino</label>
-        <input type="text" name="destino" id="destino" placeholder="coordenadas o calle, ciudad, estado..." />
-        <br />
+        <input type="text" name="destino" id="destino" placeholder="coordenadas o calle, ciudad, provincia..." />
        
         <!--div id="divError" class='alert alert-danger' role='alert' style="display:none"></div-->
         
-         <select id="modoViaje" onchange="Geolocalizacion.Rutas.buscar()">
+        <select id="modoViaje" onchange="Geolocalizacion.Rutas.buscar()">
             <option value="DRIVING" selected="selected">Auto</option>
             <option value="BICYCLING">Bicicleta</option>
             <option value="WALKING">Caminando</option>
         </select>
         
+        <br />
          <input type="button" id="buscar"  class="btn btn-primary" value="Buscar ruta" onclick="Geolocalizacion.Rutas.buscar()"/>
          
         <button type="button" id="btnMenu" class="btn btn-primary" onclick="location.href='../index.html'">Volver</button>
